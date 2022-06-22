@@ -3,6 +3,7 @@ package TestCases;
 import Constant.Constants;
 import PageObjects.GoogleSearchedPage;
 import TestBase.TestBase;
+import org.testng.Assert;
 import org.testng.annotations.Test;
 
 public class TC1 extends TestBase {
@@ -17,6 +18,10 @@ public class TC1 extends TestBase {
 
         //Step 2: Search with keyword
         System.out.println("Step 2: Search with keyword");
-        googleSearchedPage.inputSearchBox(Constants.KEYWORD);
+        googleSearchedPage.searchKeyWord(Constants.KEYWORD);
+
+        googleSearchedPage.readVideoTitleArray();
+
+        Assert.assertTrue(googleSearchedPage.isVideoText());
     }
 }

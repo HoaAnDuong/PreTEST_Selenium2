@@ -4,7 +4,9 @@ import Constant.Constants;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
+import org.testng.Assert;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class GoogleSearchedPage {
@@ -47,9 +49,39 @@ public class GoogleSearchedPage {
         Constants.WEBDRIVER.get(Constants.GOOGLE_URL);
     }
 
-    public void inputSearchBox(String searchKeyWord){
-        this.getTxtSearchInput().sendKeys(searchKeyWord);
+    public void inputSearchBox(String searchKey){
+        this.getTxtSearchInput().sendKeys(searchKey);
+    }
+
+    public void searchKeyWord(String searchKey){
+        this.getTxtSearchInput().sendKeys(searchKey);
         this.getTxtSearchInput().sendKeys(Keys.RETURN);
+    }
+
+    public List<String> getListVideosTitle(String searchKey){
+        List<String> videosTitle = new ArrayList<>();
+        for (WebElement lblVideoTitle : getLblVideosTitle(searchKey)) {
+            String videoTitle = lblVideoTitle.getText();
+            videosTitle.add(videoTitle);
+        }
+
+        return videosTitle;
+    }
+
+    public boolean isVideoText(){
+        return getListVideosTitle(Constants.KEYWORD).stream().allMatch(str -> str.trim().contains(Constants.KEYWORD));
+    }
+
+
+    /**
+     *  Getting Data from Element Methods (not for TCs)
+     */
+
+    public void readVideoTitleArray(){
+        String [] videosTitleArray = getListVideosTitle(Constants.KEYWORD).toArray(new String[getListVideosTitle(Constants.KEYWORD).size()]);
+        for (String videoTitle : videosTitleArray){
+            System.out.println(videoTitle);
+        }
     }
 
 }
