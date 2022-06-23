@@ -23,5 +23,21 @@ public class TC1 extends TestBase {
         //Step 3: Verify the main result on search result page
         System.out.println("Step 3: Verify the main result on search result page");
         Assert.assertEquals(googleSearchedPage.getMainResultText(), Constants.KEYWORD);
+
+        //Step 4: Verify the search keyword at search bar
+        System.out.println("Step 4: Verify the search keyword on the search bar");
+        Assert.assertEquals(googleSearchedPage.getSearchInputKeyWord(), Constants.KEYWORD);
+
+        googleSearchedPage.readVideoTitleArray();
+
+        //Step 5: Verify the title of video section contains the query
+        System.out.println("Step 5: Verify the title of video section contains the query");
+        Assert.assertTrue(googleSearchedPage.isVideoText(),"The title of videos in section should contains '"+ Constants.KEYWORD + "' word");
+
+        //Step 6: Verify the Top Stories contains the query
+        System.out.println("Step 5: Verify the title of video section contains the query");
+        Assert.assertEquals(googleSearchedPage.isStoryText(), "The title of story in section should contains '"+ Constants.KEYWORD + "' word");
+
+
     }
 }

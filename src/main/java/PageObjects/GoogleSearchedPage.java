@@ -17,7 +17,7 @@ public class GoogleSearchedPage {
     private final By _txtSearchInput = By.xpath("//input[@name='q' and @type='text']");
     private final By _lblMainResult = By.xpath("//div/h2[@data-attrid='title']/span");
     private final By _lstVideosSection = By.xpath("//div[@id='search']//h3[contains(text(),'Video')]/ancestor::div[@aria-level='2']/following-sibling::div/div/div");
-    private final By _lstTopStoriesSection = By.xpath("//div[starts-with(@id,'NEWS_ARTICLE_RESULT')]");
+    private final By _lstTopStoriesSection = By.xpath("//div[@id='search']//h3[contains(text(),'Top stories')]//ancestor::div[@aria-level='2']/parent::div/following-sibling::div//div/a//div[@role='heading']");
 
     /**
      * Searching Result Page WebElement
@@ -49,13 +49,18 @@ public class GoogleSearchedPage {
         Constants.WEBDRIVER.get(Constants.GOOGLE_URL);
     }
 
-    public void inputSearchBox(String searchKey){
-        this.getTxtSearchInput().sendKeys(searchKey);
-    }
-
     public void searchKeyWord(String searchKey){
         this.getTxtSearchInput().sendKeys(searchKey);
         this.getTxtSearchInput().sendKeys(Keys.RETURN);
+    }
+
+    public String getSearchInputKeyWord(){
+        return getTxtSearchInput().getAttribute("value");
+    }
+
+    public String getMainResultText(){
+        System.out.println("Main Result: " + getLblMainResult().getText());
+        return getLblMainResult().getText();
     }
 
     public List<String> getListVideosTitle(String searchKey){
@@ -64,17 +69,24 @@ public class GoogleSearchedPage {
             String videoTitle = lblVideoTitle.getText();
             videosTitle.add(videoTitle);
         }
-
         return videosTitle;
+    }
+
+    public List<String> getListTopStories(){
+        List<String> topStoriesTitle = new ArrayList<>();
+        for (WebElement lblStoriesTitle : getLstTopStoriesSection()){
+            String storiesTitle = lblStoriesTitle.getText();
+            topStoriesTitle.add(storiesTitle);
+        }
+        return topStoriesTitle;
+    }
+
+    public boolean isStoryText(){
+        return getListTopStories().stream().allMatch(str -> str.trim().contains(Constants.KEYWORD));
     }
 
     public boolean isVideoText(){
         return getListVideosTitle(Constants.KEYWORD).stream().allMatch(str -> str.trim().contains(Constants.KEYWORD));
-    }
-
-    public String getMainResultText(){
-        System.out.println("Main Result: " + getLblMainResult().getText());
-        return getLblMainResult().getText();
     }
 
     /**
@@ -85,6 +97,11 @@ public class GoogleSearchedPage {
         String [] videosTitleArray = getListVideosTitle(Constants.KEYWORD).toArray(new String[getListVideosTitle(Constants.KEYWORD).size()]);
         for (String videoTitle : videosTitleArray){
             System.out.println(videoTitle);
+        }
+
+        String [] storyTitleArray = getListTopStories().toArray(getListTopStories().toArray(new String[getListTopStories().size()]));
+        for (String storyTitle: storyTitleArray){
+            System.out.println(storyTitle);
         }
     }
 
