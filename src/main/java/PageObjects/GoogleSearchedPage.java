@@ -72,6 +72,10 @@ public class GoogleSearchedPage {
         return getListVideosTitle(Constants.KEYWORD).stream().allMatch(str -> str.trim().contains(Constants.KEYWORD));
     }
 
+    public String getMainResultText(){
+        System.out.println("Main Result: " + getLblMainResult().getText());
+        return getLblMainResult().getText();
+    }
 
     /**
      *  Getting Data from Element Methods (not for TCs)

@@ -14,6 +14,6 @@ public class TestBase {
 
     @AfterMethod
     public void closeBrowser() {
-//        ChromeDriver.quitBrowser();
+        ChromeDriver.quitBrowser();
     }
 }

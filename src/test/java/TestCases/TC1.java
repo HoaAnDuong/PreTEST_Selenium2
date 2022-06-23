@@ -20,8 +20,8 @@ public class TC1 extends TestBase {
         System.out.println("Step 2: Search with keyword");
         googleSearchedPage.searchKeyWord(Constants.KEYWORD);
 
-        googleSearchedPage.readVideoTitleArray();
-
-        Assert.assertTrue(googleSearchedPage.isVideoText());
+        //Step 3: Verify the main result on search result page
+        System.out.println("Step 3: Verify the main result on search result page");
+        Assert.assertEquals(googleSearchedPage.getMainResultText(), Constants.KEYWORD);
     }
 }
