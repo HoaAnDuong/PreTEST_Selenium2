@@ -4,7 +4,6 @@ import Constant.Constants;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
-import org.testng.Assert;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -19,6 +18,8 @@ public class GoogleSearchedPage {
     private final By _lstVideosSection = By.xpath("//div[@id='search']//h3[contains(text(),'Video')]/ancestor::div[@aria-level='2']/following-sibling::div/div/div");
     private final By _lstTopStoriesSection = By.xpath("//div[@id='search']//h3[contains(text(),'Top stories')]//ancestor::div[@aria-level='2']/parent::div/following-sibling::div//div/a//div[@role='heading']");
 
+    private final By _lstPeopleAlsoAsk = By.xpath("//div[@id='search']//h3/span[text()='People also ask']/../parent::div/following-sibling::div//div[@aria-hidden='true']/span");
+
     /**
      * Searching Result Page WebElement
      */
@@ -30,16 +31,16 @@ public class GoogleSearchedPage {
         return Constants.WEBDRIVER.findElement(_lblMainResult);
     }
 
-    public List<WebElement> getLstVideosSection(){
-        return Constants.WEBDRIVER.findElements(_lstVideosSection);
-    }
-
     private List<WebElement> getLblVideosTitle(String searchKey){
         return Constants.WEBDRIVER.findElements(By.xpath(_lstVideosSection.toString().replaceAll("By.xpath: ", "") + "//div[contains(text(),'" + searchKey +"')]"));
     }
 
     private List<WebElement> getLstTopStoriesSection(){
         return Constants.WEBDRIVER.findElements(_lstTopStoriesSection);
+    }
+
+    private List<WebElement> getLstPeopleAlsoAsk(){
+        return Constants.WEBDRIVER.findElements(_lstPeopleAlsoAsk);
     }
 
     /**
@@ -81,12 +82,25 @@ public class GoogleSearchedPage {
         return topStoriesTitle;
     }
 
+    public List<String> getListPeopleAlsoAsk(){
+        List<String> peoplesAlsoAsk = new ArrayList<>();
+        for (WebElement lblPeopleAlsoAsk: getLstPeopleAlsoAsk()){
+            String question = lblPeopleAlsoAsk.getText();
+            peoplesAlsoAsk.add(question);
+        }
+        return peoplesAlsoAsk;
+    }
+
     public boolean isStoryText(){
         return getListTopStories().stream().allMatch(str -> str.trim().contains(Constants.KEYWORD));
     }
 
     public boolean isVideoText(){
         return getListVideosTitle(Constants.KEYWORD).stream().allMatch(str -> str.trim().contains(Constants.KEYWORD));
+    }
+
+    public boolean isPeopleAlsoAsk(){
+        return getListPeopleAlsoAsk().stream().allMatch(str -> str.trim().contains(Constants.KEYWORD));
     }
 
     /**
@@ -102,6 +116,11 @@ public class GoogleSearchedPage {
         String [] storyTitleArray = getListTopStories().toArray(getListTopStories().toArray(new String[getListTopStories().size()]));
         for (String storyTitle: storyTitleArray){
             System.out.println(storyTitle);
+        }
+
+        String [] questionAsked = getListPeopleAlsoAsk().toArray(new String[getListPeopleAlsoAsk().size()]);
+        for (String question: questionAsked){
+            System.out.println(question);
         }
     }
 

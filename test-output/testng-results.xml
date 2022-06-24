@@ -2,12 +2,12 @@
 <testng-results ignored="0" total="1" passed="0" failed="1" skipped="0">
   <reporter-output>
   </reporter-output>
-  <suite started-at="2022-06-24T06:26:03 ICT" name="Pre-Test" finished-at="2022-06-24T06:26:12 ICT" duration-ms="8892">
+  <suite started-at="2022-06-24T09:01:43 ICT" name="Pre-Test" finished-at="2022-06-24T09:01:53 ICT" duration-ms="10071">
     <groups>
     </groups>
-    <test started-at="2022-06-24T06:26:03 ICT" name="Google Test" finished-at="2022-06-24T06:26:12 ICT" duration-ms="8892">
+    <test started-at="2022-06-24T09:01:43 ICT" name="Google Test" finished-at="2022-06-24T09:01:53 ICT" duration-ms="10071">
       <class name="TestCases.TC1">
-        <test-method is-config="true" signature="setUpBrowser(java.lang.String)[pri:0, instance:TestCases.TC1@b62fe6d]" started-at="2022-06-24T06:26:03 ICT" name="setUpBrowser" finished-at="2022-06-24T06:26:05 ICT" duration-ms="1570" status="PASS">
+        <test-method is-config="true" signature="setUpBrowser(java.lang.String)[pri:0, instance:TestCases.TC1@3a079870]" started-at="2022-06-24T09:01:43 ICT" name="setUpBrowser" finished-at="2022-06-24T09:01:47 ICT" duration-ms="3728" status="PASS">
           <params>
             <param index="0">
               <value>
@@ -18,7 +18,7 @@
           <reporter-output>
           </reporter-output>
         </test-method> <!-- setUpBrowser -->
-        <test-method signature="TC1()[pri:0, instance:TestCases.TC1@b62fe6d]" started-at="2022-06-24T06:26:05 ICT" name="TC1" description="TC1 - Validate results from Google Searched Page" finished-at="2022-06-24T06:26:08 ICT" duration-ms="3156" status="FAIL">
+        <test-method signature="TC1()[pri:0, instance:TestCases.TC1@3a079870]" started-at="2022-06-24T09:01:47 ICT" name="TC1" description="TC1 - Validate results from Google Searched Page" finished-at="2022-06-24T09:01:53 ICT" duration-ms="6013" status="FAIL">
           <exception class="java.lang.AssertionError">
             <message>
               <![CDATA[expected [The title of story in section should contains 'The Beatles' word] but found [false]]]>
@@ -62,7 +62,7 @@ at com.intellij.rt.testng.RemoteTestNGStarter.main(RemoteTestNGStarter.java:109)
           <reporter-output>
           </reporter-output>
         </test-method> <!-- TC1 -->
-        <test-method is-config="true" signature="closeBrowser()[pri:0, instance:TestCases.TC1@b62fe6d]" started-at="2022-06-24T06:26:08 ICT" name="closeBrowser" finished-at="2022-06-24T06:26:12 ICT" duration-ms="4134" status="PASS">
+        <test-method is-config="true" signature="closeBrowser()[pri:0, instance:TestCases.TC1@3a079870]" started-at="2022-06-24T09:01:53 ICT" name="closeBrowser" finished-at="2022-06-24T09:01:53 ICT" duration-ms="267" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- closeBrowser -->
