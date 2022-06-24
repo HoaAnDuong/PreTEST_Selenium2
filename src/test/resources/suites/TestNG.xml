@@ -5,6 +5,7 @@
         <parameter name="browser" value=""/>
         <classes>
             <class name="TestCases.TC1"/>
+            <class name="TestCases.TC2"/>
         </classes>
     </test>
 </suite>

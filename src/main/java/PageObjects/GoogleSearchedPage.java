@@ -17,7 +17,6 @@ public class GoogleSearchedPage {
     private final By _lblMainResult = By.xpath("//div/h2[@data-attrid='title']/span");
     private final By _lstVideosSection = By.xpath("//div[@id='search']//h3[contains(text(),'Video')]/ancestor::div[@aria-level='2']/following-sibling::div/div/div");
     private final By _lstTopStoriesSection = By.xpath("//div[@id='search']//h3[contains(text(),'Top stories')]//ancestor::div[@aria-level='2']/parent::div/following-sibling::div//div/a//div[@role='heading']");
-
     private final By _lstPeopleAlsoAsk = By.xpath("//div[@id='search']//h3/span[text()='People also ask']/../parent::div/following-sibling::div//div[@aria-hidden='true']/span");
 
     /**
@@ -103,11 +102,19 @@ public class GoogleSearchedPage {
         return getListPeopleAlsoAsk().stream().allMatch(str -> str.trim().contains(Constants.KEYWORD));
     }
 
+    public String getFirstVideoTitle(String searchKeyWord){
+        return getListVideosTitle(searchKeyWord).get(0);
+    }
+
+    public void clickFirstVideo(String searchKeyWord){
+        this.getLblVideosTitle(searchKeyWord).get(0).click();
+    }
+
     /**
      *  Getting Data from Element Methods (not for TCs)
      */
 
-    public void readVideoTitleArray(){
+    public String[] readVideoTitleArray(){
         String [] videosTitleArray = getListVideosTitle(Constants.KEYWORD).toArray(new String[getListVideosTitle(Constants.KEYWORD).size()]);
         for (String videoTitle : videosTitleArray){
             System.out.println(videoTitle);
@@ -122,6 +129,8 @@ public class GoogleSearchedPage {
         for (String question: questionAsked){
             System.out.println(question);
         }
+
+        return videosTitleArray;
     }
 
 }
